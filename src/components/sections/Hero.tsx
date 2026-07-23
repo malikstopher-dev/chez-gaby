@@ -8,7 +8,7 @@ import { LuxuryScene } from '@/components/threed/LuxuryScene';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 export function Hero() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const reduced = useReducedMotion();
   const containerRef = useRef<HTMLElement>(null);
 
@@ -98,6 +98,17 @@ export function Hero() {
             <span className="absolute inset-0 bg-gradient-to-r from-gold via-gold-light to-gold transition-transform duration-700 group-hover:scale-105" />
             <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(135deg, #E8D48B, #C9A84C, #D4AF37)' }} />
             <span className="relative z-10 font-medium">{t.hero.booking}</span>
+          </motion.a>
+
+          <motion.a
+            href="/menu"
+            whileHover={reduced ? {} : { scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            className="group relative px-10 py-4 text-sm tracking-[0.2em] uppercase font-sans text-black overflow-hidden rounded-full"
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-gold via-gold-light to-gold transition-transform duration-700 group-hover:scale-105" />
+            <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(135deg, #E8D48B, #C9A84C, #D4AF37)' }} />
+            <span className="relative z-10 font-medium">{lang === 'fr' ? 'Commander' : lang === 'en' ? 'Order Now' : 'Pedir Agora'}</span>
           </motion.a>
 
           <motion.a

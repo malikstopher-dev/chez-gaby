@@ -59,6 +59,12 @@ export function Header() {
                 {t.nav[item.key as keyof typeof t.nav] as string}
               </a>
             ))}
+            <a
+              href="/menu"
+              className="text-sm text-gold hover:text-gold/80 transition-colors tracking-[0.1em] uppercase font-medium"
+            >
+              {t.menu.cart}
+            </a>
             <LanguageSwitcher />
             <a
               href="#reservations"
@@ -112,6 +118,17 @@ export function Header() {
                   {t.nav[item.key as keyof typeof t.nav] as string}
                 </motion.a>
               ))}
+
+              <motion.a
+                href="/menu"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: NAV_ITEMS.length * 0.1 }}
+                onClick={() => setMobileOpen(false)}
+                className="text-2xl text-gold hover:text-gold/80 transition-colors tracking-[0.15em] uppercase font-light"
+              >
+                {t.menu.cart}
+              </motion.a>
 
               <motion.div
                 initial={{ opacity: 0 }}
