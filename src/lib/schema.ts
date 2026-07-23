@@ -72,9 +72,15 @@ export function getMenuSchema() {
     name: "Menu de Chez Gaby",
     description: "Carte raffinée franco-portugaise",
     hasMenuItem: [
+      { "@type": "MenuItem", name: "Crème de Cossa", description: "Crème onctueuse de cossa, touché d'épices" },
+      { "@type": "MenuItem", name: "Caviar", description: "Caviar d'exception, blinis et crème fraîche" },
+      { "@type": "MenuItem", name: "Sole d'Ostende", description: "Sole meunière, beurre de citron" },
       { "@type": "MenuItem", name: "Wagyu", description: "Wagyu A5, sauce truffée" },
+      { "@type": "MenuItem", name: "Steak Gaby", description: "Steak signature, sauce vin rouge et ail, œuf au plat" },
       { "@type": "MenuItem", name: "Homard", description: "Homard grillé, beurre à l'ail" },
       { "@type": "MenuItem", name: "Plateau de Fruits de Mer", description: "Plateau royal de fruits de mer frais" },
+      { "@type": "MenuItem", name: "Spaghetti LÉONCY à la Truffe", description: "Spaghetti à la truffe noire, façon LÉONCY" },
+      { "@type": "MenuItem", name: "Flan Maison", description: "Flan traditionnel, crème vanillée, caramel" },
     ],
   };
 }

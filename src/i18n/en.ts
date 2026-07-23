@@ -34,6 +34,7 @@ export const en = {
       volailles: 'Poultry',
       viandes: 'Meat',
       fruitsDeMer: 'Seafood',
+      desserts: 'Desserts',
     },
     chefRecommendation: 'Chef\'s Recommendation',
     winePairing: 'Wine Pairing',

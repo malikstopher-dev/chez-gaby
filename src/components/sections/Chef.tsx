@@ -21,13 +21,27 @@ export function Chef() {
             className="relative order-2 md:order-1"
           >
             <div className="aspect-[3/4] glass rounded-3xl overflow-hidden luxury-shadow">
-              <div className="w-full h-full flex flex-col items-center justify-center p-8">
-                <div className="w-32 h-32 rounded-full gold-gradient-solid/10 flex items-center justify-center mb-6">
-                  <span className="text-5xl font-serif gold-gradient">G</span>
-                </div>
-                <h3 className="text-2xl font-serif text-white mb-2">{t.chef.subtitle}</h3>
-                <p className="text-gold/60 text-xs tracking-[0.2em] uppercase">{t.chef.signature}</p>
-              </div>
+              <img
+                src="/images/chef-gabriel.jpg"
+                alt="Gabriel Sousa Rosa - Créateur de Saveurs"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  target.style.display = 'none';
+                  const parent = target.parentElement;
+                  if (parent) {
+                    parent.innerHTML = `
+                      <div class="w-full h-full flex flex-col items-center justify-center p-8">
+                        <div class="w-32 h-32 rounded-full gold-gradient-solid/10 flex items-center justify-center mb-6">
+                          <span class="text-5xl font-serif gold-gradient">G</span>
+                        </div>
+                        <h3 class="text-2xl font-serif text-white mb-2">Gabriel Sousa Rosa</h3>
+                        <p class="text-gold/60 text-xs tracking-[0.2em] uppercase">Créateur de Saveurs</p>
+                      </div>
+                    `;
+                  }
+                }}
+              />
             </div>
             <div className="absolute -top-4 -left-4 w-full h-full border border-gold/10 rounded-3xl -z-10" />
           </motion.div>

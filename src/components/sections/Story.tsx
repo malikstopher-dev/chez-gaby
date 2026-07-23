@@ -54,16 +54,30 @@ export function Story() {
             className="relative"
           >
             <div className="aspect-[4/5] glass rounded-3xl overflow-hidden luxury-shadow">
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-full gold-gradient-solid/20 flex items-center justify-center">
-                    <span className="text-4xl font-serif gold-gradient">CG</span>
-                  </div>
-                  <p className="text-white/30 text-sm italic max-w-xs mx-auto">
-                    "Une cuisine lusitanienne largement appréciée, un cadre très plaisant, un service incomparable."
-                  </p>
-                </div>
-              </div>
+              <img
+                src="/images/story-restaurant.jpg"
+                alt="Chez Gaby - Ambiance du restaurant"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  target.style.display = 'none';
+                  const parent = target.parentElement;
+                  if (parent) {
+                    parent.innerHTML = `
+                      <div class="w-full h-full flex items-center justify-center">
+                        <div class="text-center p-8">
+                          <div class="w-24 h-24 mx-auto mb-6 rounded-full gold-gradient-solid/20 flex items-center justify-center">
+                            <span class="text-4xl font-serif gold-gradient">CG</span>
+                          </div>
+                          <p class="text-white/30 text-sm italic max-w-xs mx-auto">
+                            "Une cuisine lusitanienne largement appréciée, un cadre très plaisant, un service incomparable."
+                          </p>
+                        </div>
+                      </div>
+                    `;
+                  }
+                }}
+              />
             </div>
             <div className="absolute -bottom-4 -right-4 w-full h-full border border-gold/10 rounded-3xl -z-10" />
           </motion.div>
