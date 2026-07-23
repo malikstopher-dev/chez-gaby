@@ -6,12 +6,12 @@ import { useLanguage } from '@/store/language';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
 const GALLERY_IMAGES = [
-  { id: 1, label: 'Ambiance', src: 'https://images.squarespace-cdn.com/content/v1/667ede69fd22f21c53cfe7f9/7bae2524-f60b-4364-9dfb-9dfd85fde329/IMG_54755.JPG' },
-  { id: 2, label: 'Plat Signature', src: 'https://images.squarespace-cdn.com/content/v1/667ede69fd22f21c53cfe7f9/1719592933691-14HVFEZX26WC048YKXUL/image-asset.jpeg' },
-  { id: 3, label: 'Caviar', src: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/14/f5/47/caption.jpg' },
-  { id: 4, label: 'Gambas', src: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/30/b9/ed/31/gambas.jpg' },
-  { id: 5, label: 'Interior', src: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/da/7a/4c/tres-beau-cadre-top.jpg' },
-  { id: 6, label: 'Wine', src: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/47/3b/89/top-wines-selection.jpg' },
+  { id: 1, label: 'Ambiance', src: '/images/gallery-1.jpg' },
+  { id: 2, label: 'Plat Signature', src: '/images/gallery-2.jpg' },
+  { id: 3, label: 'Caviar', src: '/images/gallery-3.jpg' },
+  { id: 4, label: 'Gambas', src: '/images/gallery-4.jpg' },
+  { id: 5, label: 'Interior', src: '/images/gallery-5.jpg' },
+  { id: 6, label: 'Wine', src: '/images/gallery-6.jpg' },
 ];
 
 export function Gallery() {

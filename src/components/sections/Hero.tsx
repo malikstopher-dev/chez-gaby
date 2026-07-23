@@ -41,7 +41,7 @@ export function Hero() {
           className="mb-8"
         >
           <img
-            src="/images/logo.png"
+            src="/images/logo.jpg"
             alt="Chez Gaby"
             className="h-16 md:h-20 mx-auto object-contain"
             onError={(e) => { e.currentTarget.style.display = 'none'; }}
