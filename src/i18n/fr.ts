@@ -49,6 +49,7 @@ export const fr = {
     orderWhatsApp: 'Commander via WhatsApp',
     removeFromCart: 'Retirer',
     quantity: 'Qtd',
+    clearCart: 'Vider le panier',
   },
   wine: {
     title: 'Cave à Vins',

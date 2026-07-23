@@ -49,6 +49,7 @@ export const en = {
     orderWhatsApp: 'Order via WhatsApp',
     removeFromCart: 'Remove',
     quantity: 'Qty',
+    clearCart: 'Clear cart',
   },
   wine: {
     title: 'Wine Cellar',

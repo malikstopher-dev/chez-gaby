@@ -49,6 +49,7 @@ export const pt = {
     orderWhatsApp: 'Pedir via WhatsApp',
     removeFromCart: 'Remover',
     quantity: 'Qtd',
+    clearCart: 'Limpar pedido',
   },
   wine: {
     title: 'Adega',

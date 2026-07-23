@@ -6,6 +6,7 @@ import { useLanguage } from '@/store/language';
 import { useCart, buildWhatsAppMessage } from '@/store/cart';
 import { menuCategories } from '@/lib/menuData';
 import { whatsappUrl } from '@/lib/utils';
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
 
 const PHONE = '+243819976959';
 
@@ -26,6 +27,22 @@ export default function MenuPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      {/* Top Nav Bar */}
+      <nav className="fixed top-0 left-0 right-0 z-40 bg-black/60 backdrop-blur-xl border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+          <a href="/" className="flex items-center gap-2 text-white/70 hover:text-gold transition-colors">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+            <span className="font-serif text-lg text-gold">CG</span>
+            <span className="text-xs tracking-[0.15em] uppercase text-white/40 hidden sm:inline">
+              {lang === 'fr' ? 'Retour' : lang === 'en' ? 'Home' : 'Início'}
+            </span>
+          </a>
+          <LanguageSwitcher />
+        </div>
+      </nav>
+
       <div className="max-w-7xl mx-auto px-4 py-12 pt-24">
         {/* Header */}
         <div className="text-center mb-12">
@@ -45,7 +62,7 @@ export default function MenuPage() {
                   : 'border border-white/10 text-white/40 hover:text-white hover:border-white/20'
               }`}
             >
-              {lang === 'fr' ? cat.name : lang === 'en' ? cat.nameEn : cat.nameEn}
+              {lang === 'fr' ? cat.name : lang === 'pt' ? cat.namePt : cat.nameEn}
               <span className="ml-1.5 text-[10px] opacity-50">({cat.items.length})</span>
             </button>
           ))}
@@ -81,7 +98,7 @@ export default function MenuPage() {
                         )}
                       </div>
                       <p className="text-white/30 text-xs leading-relaxed line-clamp-2">
-                        {lang === 'fr' ? item.description : lang === 'en' ? item.descriptionEn : item.descriptionEn}
+                        {lang === 'fr' ? item.description : lang === 'pt' ? item.descriptionPt : item.descriptionEn}
                       </p>
                     </div>
 
@@ -171,7 +188,7 @@ export default function MenuPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 z-50"
+              className="fixed inset-0 bg-black/60 z-[60]"
               onClick={() => setShowCart(false)}
             />
             <motion.div
@@ -179,7 +196,7 @@ export default function MenuPage() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-charcoal border-l border-white/10 z-50 flex flex-col"
+              className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-charcoal border-l border-white/10 z-[60] flex flex-col"
             >
               <div className="flex items-center justify-between p-5 border-b border-white/10">
                 <h2 className="font-serif text-xl text-gold">{t.menu.cart}</h2>
@@ -249,7 +266,7 @@ export default function MenuPage() {
                     onClick={clearCart}
                     className="w-full py-2 text-white/30 text-xs hover:text-red-400 transition-colors"
                   >
-                    {lang === 'fr' ? 'Vider le panier' : lang === 'en' ? 'Clear cart' : 'Limpar pedido'}
+                    {t.menu.clearCart}
                   </button>
                 </div>
               )}
