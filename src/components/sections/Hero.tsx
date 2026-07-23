@@ -1,16 +1,33 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/store/language';
 import { ScrollIndicator } from '@/components/ui/ScrollIndicator';
 import { LuxuryScene } from '@/components/threed/LuxuryScene';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
+const SLIDESHOW_IMAGES = [
+  '/images/chezgaby1.jpg',
+  '/images/chezgaby2.jpg',
+  '/images/chezgaby3.jpg',
+  '/images/chezgaby4.jpg',
+  '/images/chezgaby5.jpg',
+  '/images/chezgaby6.jpg',
+];
+
 export function Hero() {
   const { t, lang } = useLanguage();
   const reduced = useReducedMotion();
   const containerRef = useRef<HTMLElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % SLIDESHOW_IMAGES.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section
@@ -20,10 +37,24 @@ export function Hero() {
       role="banner"
       aria-label="Chez Gaby hero section"
     >
-      <div className="absolute inset-0 candlelight" aria-hidden="true" />
-      <div className="absolute inset-0 vignette" aria-hidden="true" />
-      <div className="absolute inset-0 hero-glow" aria-hidden="true" />
+      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentSlide}
+            src={SLIDESHOW_IMAGES[currentSlide]}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.05 }}
+            transition={{ duration: 1.2 }}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </AnimatePresence>
+      </div>
 
+      <div className="absolute inset-0 bg-black/50 z-[1]" aria-hidden="true" />
+      <div className="absolute inset-0 candlelight z-[1]" aria-hidden="true" />
+      <div className="absolute inset-0 vignette z-[1]" aria-hidden="true" />
+      <div className="absolute inset-0 hero-glow z-[1]" aria-hidden="true" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 z-[1]" aria-hidden="true" />
 
       <LuxuryScene />

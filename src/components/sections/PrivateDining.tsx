@@ -22,12 +22,26 @@ export function PrivateDining() {
             className="order-2 md:order-1"
           >
             <div className="glass rounded-3xl overflow-hidden luxury-shadow aspect-[4/3]">
-              <div className="w-full h-full flex items-center justify-center">
-                <div className="text-center p-8">
-                  <span className="text-6xl">🕯️</span>
-                  <p className="text-white/30 text-sm mt-4 italic">Salle Privée</p>
-                </div>
-              </div>
+              <img
+                src="/images/private-dining.jpg"
+                alt="Chez Gaby - Salao Privado"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  target.style.display = 'none';
+                  const parent = target.parentElement;
+                  if (parent) {
+                    parent.innerHTML = `
+                      <div class="w-full h-full flex items-center justify-center">
+                        <div class="text-center p-8">
+                          <span class="text-6xl">🕯️</span>
+                          <p class="text-white/30 text-sm mt-4 italic">Salle Privée</p>
+                        </div>
+                      </div>
+                    `;
+                  }
+                }}
+              />
             </div>
           </motion.div>
 
