@@ -182,7 +182,7 @@ export function Hero() {
           >
             <span className="absolute inset-0 bg-gradient-to-r from-gold via-gold-light to-gold transition-transform duration-700 group-hover:scale-105" />
             <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: 'linear-gradient(135deg, #E8D48B, #C9A84C, #D4AF37)' }} />
-            <span className="relative z-10 font-medium">{lang === 'fr' ? 'Commander' : lang === 'en' ? 'Order Now' : 'Pedir Agora'}</span>
+            <span className="relative z-10 font-medium">{t.hero.orderNow}</span>
           </motion.a>
 
           <motion.a
@@ -203,15 +203,15 @@ export function Hero() {
         >
           <span className="flex items-center gap-2">
             <span className="w-1 h-1 rounded-full bg-gold/40" />
-            Cuisine Franco-Portugaise
+            {t.hero.cuisineType}
           </span>
           <span className="flex items-center gap-2">
             <span className="w-1 h-1 rounded-full bg-gold/40" />
-            Fruits de Mer
+            {t.hero.seafood}
           </span>
           <span className="flex items-center gap-2">
             <span className="w-1 h-1 rounded-full bg-gold/40" />
-            Viandes Premium
+            {t.hero.premiumMeats}
           </span>
         </motion.div>
       </div>
@@ -227,7 +227,7 @@ export function Hero() {
           </a>
           <a href="/menu" className="flex flex-col items-center gap-0.5 text-gold">
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
-            <span className="text-[9px] tracking-wider uppercase font-medium">Menu</span>
+            <span className="text-[9px] tracking-wider uppercase font-medium">{t.nav.menu}</span>
           </a>
           <a href="#story" className="flex flex-col items-center gap-0.5 text-white/60 hover:text-gold transition-colors">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
@@ -235,7 +235,7 @@ export function Hero() {
           </a>
           <a href="tel:+243819976959" className="flex flex-col items-center gap-0.5 text-white/60 hover:text-gold transition-colors">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
-            <span className="text-[9px] tracking-wider uppercase">Appeler</span>
+            <span className="text-[9px] tracking-wider uppercase">{t.nav.call}</span>
           </a>
         </div>
       </div>

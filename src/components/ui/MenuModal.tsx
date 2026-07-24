@@ -68,7 +68,7 @@ export function MenuModal({ item, onClose, onAddToCart, cartQuantity = 0, onUpda
               <div className="flex items-center gap-2 mb-3">
                 {item.chefPick && (
                   <span className="text-[10px] tracking-[0.12em] uppercase text-gold bg-gold/10 px-3 py-1 rounded-full border border-gold/20">
-                    ★ {lang === 'fr' ? 'Choix du Chef' : lang === 'pt' ? 'Escolha do Chef' : "Chef's Pick"}
+                    ★ {t.menu.chefPick}
                   </span>
                 )}
                 {item.winePairing && (
@@ -116,9 +116,7 @@ export function MenuModal({ item, onClose, onAddToCart, cartQuantity = 0, onUpda
                     }}
                     className="px-8 py-3 bg-gold text-black font-medium rounded-full hover:bg-gold/90 transition-colors text-sm tracking-wide"
                   >
-                    {cartQuantity > 0
-                      ? lang === 'fr' ? 'Ajouter encore' : lang === 'pt' ? 'Adicionar mais' : 'Add More'
-                      : lang === 'fr' ? 'Ajouter au panier' : lang === 'pt' ? 'Adicionar ao carrinho' : 'Add to Cart'}
+                    {cartQuantity > 0 ? t.menu.addMore : t.menu.addToCartFull}
                   </button>
                 </div>
               )}
@@ -129,7 +127,7 @@ export function MenuModal({ item, onClose, onAddToCart, cartQuantity = 0, onUpda
                   href="/menu"
                   className="block w-full py-3 bg-gold text-black font-medium rounded-full hover:bg-gold/90 transition-colors text-sm tracking-wide text-center"
                 >
-                  {lang === 'fr' ? 'Voir le Menu complet' : lang === 'pt' ? 'Ver Menu Completo' : 'View Full Menu'}
+                  {t.menu.viewFullMenu}
                 </a>
               )}
             </div>

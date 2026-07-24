@@ -41,7 +41,7 @@ export function Story() {
             >
               <div className="w-12 h-[1px] gold-gradient-solid" />
               <span className="text-xs tracking-[0.2em] uppercase text-gold/60">
-                Depuis des décennies
+                {t.story.sinceDecades}
               </span>
             </motion.div>
           </div>
@@ -70,7 +70,7 @@ export function Story() {
                             <span class="text-4xl font-serif gold-gradient">CG</span>
                           </div>
                           <p class="text-white/30 text-sm italic max-w-xs mx-auto">
-                            "Une cuisine lusitanienne largement appréciée, un cadre très plaisant, un service incomparable."
+                            ${t.story.fallbackQuote}
                           </p>
                         </div>
                       </div>

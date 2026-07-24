@@ -17,7 +17,7 @@ export function Reservations() {
     setSubmitted(true);
   };
 
-  const whatsappMessage = `Bonjour Chez Gaby, je souhaite réserver une table pour ${form.guests} personnes le ${form.date} à ${form.time}. ${form.name ? `- ${form.name}` : ''}`;
+  const whatsappMessage = `${t.reservations.whatsappMessage} pour ${form.guests} personnes le ${form.date} à ${form.time}. ${form.name ? `- ${form.name}` : ''}`;
 
   return (
     <section id="reservations" className="relative py-32 overflow-hidden">
@@ -160,7 +160,7 @@ export function Reservations() {
               </a>
 
               <div className="mt-6 p-6 glass rounded-2xl">
-                <p className="text-white/30 text-xs tracking-[0.15em] uppercase mb-2">Contact</p>
+                <p className="text-white/30 text-xs tracking-[0.15em] uppercase mb-2">{t.footer.contact}</p>
                 <p className="text-white/60 text-sm">+243 819 976 959</p>
                 <p className="text-white/40 text-xs mt-1">restogabygabriel@gmail.com</p>
               </div>

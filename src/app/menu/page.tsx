@@ -38,7 +38,7 @@ export default function MenuPage() {
             </svg>
             <span className="font-serif text-lg text-gold">CG</span>
             <span className="text-xs tracking-[0.15em] uppercase text-white/40 hidden sm:inline">
-              {lang === 'fr' ? 'Retour' : lang === 'en' ? 'Home' : 'Início'}
+              {t.nav.back}
             </span>
           </a>
           <LanguageSwitcher />
@@ -98,7 +98,7 @@ export default function MenuPage() {
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
                         <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-3 py-1.5 bg-gold text-black text-[10px] md:text-xs font-medium rounded-full tracking-wide">
-                          {lang === 'fr' ? 'Ajouter' : lang === 'pt' ? 'Adicionar' : 'Add'}
+                          {t.menu.addToCart}
                         </span>
                       </div>
                     </div>
@@ -111,7 +111,7 @@ export default function MenuPage() {
                         </h3>
                         {item.chefPick && (
                           <span className="shrink-0 text-[9px] md:text-[10px] tracking-wider uppercase text-gold/80 bg-gold/10 px-2 py-0.5 rounded-full">
-                            ★ Chef
+                            ★ {t.menu.chefPick}
                           </span>
                         )}
                       </div>

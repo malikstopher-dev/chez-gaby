@@ -5,14 +5,14 @@ import { useLanguage } from '@/store/language';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
 const ITEMS = [
-  { name: 'Homard', descFr: 'Homard grillé, beurre à l\'ail', descEn: 'Grilled lobster, garlic butter', image: '/images/homard.jpg' },
-  { name: 'Plateau Royal', descFr: 'Plateau de fruits de mer frais', descEn: 'Fresh seafood platter', image: '/images/plateau-royal.jpg' },
-  { name: 'Pieuvre Grillée', descFr: 'Pieuvre à la LORENA', descEn: 'Grilled octopus LORENA style', image: '/images/pieuvre-grillee.jpg' },
-  { name: 'Saint-Jacques', descFr: 'Saint-Jacques façon NATHALIE', descEn: 'Scallops NATHALIE style', image: '/images/saint-jacques.jpg' },
+  { name: 'Homard', descKey: 'homardDesc' as const, image: '/images/homard.jpg' },
+  { name: 'Plateau Royal', descKey: 'plateauDesc' as const, image: '/images/plateau-royal.jpg' },
+  { name: 'Pieuvre Grillée', descKey: 'pieuvreDesc' as const, image: '/images/pieuvre-grillee.jpg' },
+  { name: 'Saint-Jacques', descKey: 'saintJacquesDesc' as const, image: '/images/saint-jacques.jpg' },
 ];
 
 export function Seafood() {
-  const { t, lang } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <section id="seafood" className="relative py-32 overflow-hidden">
@@ -43,7 +43,7 @@ export function Seafood() {
               <div className="p-6">
                 <h3 className="text-white font-serif text-xl mb-2 group-hover:text-gold transition-colors">{item.name}</h3>
                 <p className="text-white/40 text-sm leading-relaxed">
-                  {lang === 'fr' ? item.descFr : item.descEn}
+                  {t.seafood[item.descKey]}
                 </p>
               </div>
             </motion.div>

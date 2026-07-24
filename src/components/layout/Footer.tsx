@@ -21,7 +21,7 @@ export function Footer() {
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase text-gold mb-6">{t.footer.hoursTitle}</h4>
             <p className="text-sm text-white/60 leading-relaxed">{t.footer.hours}</p>
-            <p className="text-sm text-white/40 mt-2">Dimanche fermé</p>
+            <p className="text-sm text-white/40 mt-2">{t.footer.sundayClosed}</p>
           </div>
 
           <div>
@@ -68,7 +68,7 @@ export function Footer() {
             © {new Date().getFullYear()} Chez Gaby. {t.footer.rights}
           </p>
           <p className="text-xs text-white/20">
-            26 Avenue Roi Baudouin, Gombe, Kinshasa
+            {t.location.address}
           </p>
         </div>
       </div>

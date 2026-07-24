@@ -5,13 +5,13 @@ import { useLanguage } from '@/store/language';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
 const WINE_REGIONS = [
-  { name: 'Bordeaux', descFr: "Une sélection des meilleurs crus de Bordeaux", descEn: "A selection of the finest Bordeaux vintages", image: '/images/bordeaux.jpg' },
-  { name: 'Bourgogne', descFr: "Les grands vins de Bourgogne soigneusement sélectionnés", descEn: "Great Burgundy wines carefully selected", image: '/images/bourgogne.jpg' },
-  { name: 'Portugal', descFr: "Les meilleurs crus portugais de notre carte", descEn: "The finest Portuguese vintages on our list", image: '/images/portugal.jpg' },
+  { name: 'Bordeaux', descKey: 'bordeauxDesc' as const, image: '/images/bordeaux.jpg' },
+  { name: 'Bourgogne', descKey: 'burgundyDesc' as const, image: '/images/bourgogne.jpg' },
+  { name: 'Portugal', descKey: 'portugalDesc' as const, image: '/images/portugal.jpg' },
 ];
 
 export function WineCellar() {
-  const { t, lang } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <section id="wine" className="relative py-32 overflow-hidden">
@@ -51,7 +51,7 @@ export function WineCellar() {
               <div className="p-6 text-center">
                 <h3 className="text-white font-serif text-xl mb-3">{region.name}</h3>
                 <p className="text-white/40 text-sm leading-relaxed">
-                  {lang === 'fr' ? region.descFr : region.descEn}
+                  {t.wine[region.descKey]}
                 </p>
               </div>
             </motion.div>

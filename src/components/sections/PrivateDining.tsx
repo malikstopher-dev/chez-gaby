@@ -24,7 +24,7 @@ export function PrivateDining() {
             <div className="glass rounded-3xl overflow-hidden luxury-shadow aspect-[4/3]">
               <img
                 src="/images/private-dining.jpg"
-                alt="Chez Gaby - Salao Privado"
+                alt={t.privateDining.title}
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   const target = e.currentTarget;
@@ -35,7 +35,7 @@ export function PrivateDining() {
                       <div class="w-full h-full flex items-center justify-center">
                         <div class="text-center p-8">
                           <span class="text-6xl">🕯️</span>
-                          <p class="text-white/30 text-sm mt-4 italic">Salle Privée</p>
+                          <p class="text-white/30 text-sm mt-4 italic">${t.privateDining.fallbackTitle}</p>
                         </div>
                       </div>
                     `;
