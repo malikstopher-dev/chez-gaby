@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/store/language';
 import { SectionTitle } from '@/components/ui/SectionTitle';
-import { GlassCard } from '@/components/ui/GlassCard';
 import { menuCategories } from '@/lib/menuData';
 
 export function Menu() {
@@ -46,29 +45,45 @@ export function Menu() {
             className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto"
           >
             {activeData?.items.map((item, i) => (
-              <GlassCard key={item.name} delay={i * 0.05} className="group">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-white font-serif text-lg group-hover:text-gold transition-colors">
-                    {item.name}
-                  </h3>
-                  <span className="text-gold/60 text-sm ml-4 whitespace-nowrap">{item.price}</span>
-                </div>
-                <p className="text-white/40 text-sm leading-relaxed">
-                  {lang === 'fr' ? item.description : item.descriptionEn}
-                </p>
-                <div className="flex gap-3 mt-3">
-                  {item.chefPick && (
-                    <span className="text-[10px] tracking-[0.1em] uppercase text-gold/70 bg-gold/5 px-2.5 py-1 rounded-full">
-                      {t.menu.chefRecommendation}
-                    </span>
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.6, delay: i * 0.05 }}
+                className="glass rounded-2xl overflow-hidden luxury-shadow transition-all duration-500 hover:bg-glass-hover hover:border-gold/20 group"
+              >
+                <div className="flex gap-0">
+                  {item.image && (
+                    <div className="w-24 shrink-0 overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 min-h-[120px]"
+                        loading="lazy"
+                      />
+                    </div>
                   )}
-                  {item.winePairing && (
-                    <span className="text-[10px] tracking-[0.1em] uppercase text-white/40 bg-white/5 px-2.5 py-1 rounded-full">
-                      {t.menu.winePairing}
-                    </span>
-                  )}
+                  <div className="flex-1 p-4">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="text-white font-serif text-base group-hover:text-gold transition-colors">
+                        {item.name}
+                      </h3>
+                      <span className="text-gold/60 text-sm ml-3 whitespace-nowrap">{item.price}</span>
+                    </div>
+                    <p className="text-white/40 text-xs leading-relaxed line-clamp-2">
+                      {lang === 'fr' ? item.description : lang === 'pt' ? item.descriptionPt : item.descriptionEn}
+                    </p>
+                    <div className="flex gap-3 mt-2">
+                      {item.chefPick && (
+                        <span className="text-[9px] tracking-[0.1em] uppercase text-gold/70 bg-gold/5 px-2 py-0.5 rounded-full">
+                          {t.menu.chefRecommendation}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </GlassCard>
+              </motion.div>
             ))}
           </motion.div>
         </AnimatePresence>
