@@ -15,15 +15,29 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const router = useRouter();
   const [userEmail, setUserEmail] = useState('');
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(({ data }) => {
-      if (data.user) setUserEmail(data.user.email || '');
+      if (data.user) {
+        setUserEmail(data.user.email || '');
+      } else if (pathname !== '/admin/login') {
+        router.push('/admin/login');
+      }
+      setChecking(false);
     });
-  }, []);
+  }, [pathname, router]);
 
   if (pathname === '/admin/login') return <>{children}</>;
+  if (checking) return (
+    <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="text-center">
+        <span className="text-4xl font-serif gold-gradient">CG</span>
+        <p className="text-white/30 text-sm mt-4">Vérification...</p>
+      </div>
+    </div>
+  );
 
   const handleLogout = async () => {
     const supabase = createClient();
@@ -33,7 +47,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="min-h-screen bg-black text-white flex">
-      {/* Sidebar */}
       <aside className="w-64 bg-charcoal/50 border-r border-white/5 flex flex-col shrink-0">
         <div className="p-6 border-b border-white/5">
           <Link href="/admin" className="flex items-center gap-3">
@@ -83,7 +96,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
       </aside>
 
-      {/* Main content */}
       <main className="flex-1 overflow-y-auto">
         <div className="max-w-5xl mx-auto p-8">
           {children}
