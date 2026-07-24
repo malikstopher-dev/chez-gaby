@@ -55,23 +55,23 @@ export function Menu() {
               >
                 <div className="flex gap-0">
                   {item.image && (
-                    <div className="w-24 shrink-0 overflow-hidden">
+                    <div className="w-20 h-20 md:w-40 md:h-36 shrink-0 overflow-hidden">
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 min-h-[120px]"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         loading="lazy"
                       />
                     </div>
                   )}
-                  <div className="flex-1 p-4">
+                  <div className="flex-1 p-3 md:p-5">
                     <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-white font-serif text-base group-hover:text-gold transition-colors">
+                      <h3 className="text-white font-serif text-sm md:text-lg group-hover:text-gold transition-colors">
                         {item.name}
                       </h3>
-                      <span className="text-gold/60 text-sm ml-3 whitespace-nowrap">{item.price}</span>
+                      <span className="text-gold/60 text-xs md:text-sm ml-3 whitespace-nowrap">{item.price}</span>
                     </div>
-                    <p className="text-white/40 text-xs leading-relaxed line-clamp-2">
+                    <p className="text-white/40 text-[11px] md:text-sm leading-relaxed line-clamp-2">
                       {lang === 'fr' ? item.description : lang === 'pt' ? item.descriptionPt : item.descriptionEn}
                     </p>
                     <div className="flex gap-3 mt-2">

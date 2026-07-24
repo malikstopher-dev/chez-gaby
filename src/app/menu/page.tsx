@@ -83,10 +83,10 @@ export default function MenuPage() {
               return (
                 <div
                   key={item.name}
-                  className="group border border-white/5 rounded-xl hover:border-gold/20 transition-all duration-300 bg-white/[0.02] hover:bg-white/[0.04] overflow-hidden flex gap-3"
+                  className="group border border-white/5 rounded-xl hover:border-gold/20 transition-all duration-300 bg-white/[0.02] hover:bg-white/[0.04] overflow-hidden flex"
                 >
                   {item.image && (
-                    <div className="w-20 h-20 shrink-0 overflow-hidden rounded-lg m-3 -ml-0">
+                    <div className="w-20 h-20 md:w-36 md:h-auto shrink-0 overflow-hidden">
                       <img
                         src={item.image}
                         alt={item.name}
@@ -95,25 +95,25 @@ export default function MenuPage() {
                       />
                     </div>
                   )}
-                  <div className="flex-1 min-w-0 p-3 pr-4 flex flex-col justify-between">
+                  <div className="flex-1 min-w-0 p-3 md:p-4 pr-4 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-serif text-white text-sm group-hover:text-gold transition-colors truncate">
+                        <h3 className="font-serif text-white text-sm md:text-base group-hover:text-gold transition-colors truncate">
                           {item.name}
                         </h3>
                         {item.chefPick && (
-                          <span className="shrink-0 text-[9px] tracking-wider uppercase text-gold/80 bg-gold/10 px-2 py-0.5 rounded-full">
+                          <span className="shrink-0 text-[9px] md:text-[10px] tracking-wider uppercase text-gold/80 bg-gold/10 px-2 py-0.5 rounded-full">
                             ★ Chef
                           </span>
                         )}
                       </div>
-                      <p className="text-white/30 text-xs leading-relaxed line-clamp-2">
+                      <p className="text-white/30 text-[11px] md:text-xs leading-relaxed line-clamp-2">
                         {lang === 'fr' ? item.description : lang === 'pt' ? item.descriptionPt : item.descriptionEn}
                       </p>
                     </div>
 
                     <div className="flex items-center justify-between mt-2">
-                      <span className="text-gold/50 text-xs">{item.price}</span>
+                      <span className="text-gold/50 text-xs md:text-sm">{item.price}</span>
                       <div className="flex items-center gap-2">
                       {inCart ? (
                         <div className="flex items-center gap-1.5 bg-white/5 rounded-full border border-white/10">
