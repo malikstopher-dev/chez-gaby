@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { createClient } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 import Link from 'next/link';
 
 const NAV_ITEMS = [
@@ -18,7 +18,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    const supabase = createClient();
+    const supabase = getSupabase();
     supabase.auth.getUser().then(({ data }) => {
       if (data.user) {
         setUserEmail(data.user.email || '');
@@ -40,7 +40,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   );
 
   const handleLogout = async () => {
-    const supabase = createClient();
+    const supabase = getSupabase();
     await supabase.auth.signOut();
     router.push('/admin/login');
   };
