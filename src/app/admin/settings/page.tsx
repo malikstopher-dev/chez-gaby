@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 
 const DEFAULT_SETTINGS = {
   address: '26 Avenue Roi Baudouin, Gombe, Kinshasa',
@@ -34,7 +34,7 @@ export default function SettingsPage() {
   }, []);
 
   const loadSettings = async () => {
-    const supabase = createClient();
+    const supabase = getSupabase();
     const { data, error } = await supabase.from('restaurant_settings').select('*').limit(1).single();
     if (data) {
       setSettings({ ...DEFAULT_SETTINGS, ...data });
@@ -50,7 +50,7 @@ export default function SettingsPage() {
     setSaving(true);
     setSaved(false);
     setError('');
-    const supabase = createClient();
+    const supabase = getSupabase();
     const { error } = await supabase.from('restaurant_settings').upsert({ id: 1, ...settings });
     if (error) {
       setError(error.message);

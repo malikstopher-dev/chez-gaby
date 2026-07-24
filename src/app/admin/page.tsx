@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 import Link from 'next/link';
 
 const CARDS = [
@@ -14,7 +14,7 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState({ menuItems: 0, categories: 0 });
 
   useEffect(() => {
-    const supabase = createClient();
+    const supabase = getSupabase();
     supabase.auth.getUser().then(({ data }) => {
       if (data.user) setUserEmail(data.user.email || '');
     });

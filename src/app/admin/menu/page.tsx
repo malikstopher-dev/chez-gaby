@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase';
+import { getSupabase } from '@/lib/supabase';
 
 interface Category {
   id: string;
@@ -35,7 +35,7 @@ export default function AdminMenu() {
   }, []);
 
   const loadData = async () => {
-    const supabase = createClient();
+    const supabase = getSupabase();
     const [catsRes, itemsRes] = await Promise.all([
       supabase.from('menu_categories').select('*').order('sort_order'),
       supabase.from('menu_items').select('*').order('sort_order'),
