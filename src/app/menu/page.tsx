@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/store/language';
 import { useCart, buildWhatsAppMessage } from '@/store/cart';
-import { menuCategories } from '@/lib/menuData';
+import { menuCategories, type MenuItem } from '@/lib/menuData';
 import { whatsappUrl } from '@/lib/utils';
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher';
+import { MenuModal } from '@/components/ui/MenuModal';
 
 const PHONE = '+243819976959';
 
@@ -15,6 +16,7 @@ export default function MenuPage() {
   const { items: cartItems, addItem, removeItem, updateQuantity, clearCart } = useCart();
   const [activeCategory, setActiveCategory] = useState(menuCategories[0].id);
   const [showCart, setShowCart] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
   const activeData = menuCategories.find((c) => c.id === activeCategory);
   const totalItems = cartItems.reduce((sum, i) => sum + i.quantity, 0);
@@ -83,16 +85,22 @@ export default function MenuPage() {
               return (
                 <div
                   key={item.name}
-                  className="group border border-white/5 rounded-xl hover:border-gold/20 transition-all duration-300 bg-white/[0.02] hover:bg-white/[0.04] overflow-hidden flex"
+                  className="group border border-white/5 rounded-xl hover:border-gold/20 transition-all duration-300 bg-white/[0.02] hover:bg-white/[0.04] overflow-hidden flex cursor-pointer"
+                  onClick={() => setSelectedItem(item)}
                 >
                   {item.image && (
-                    <div className="w-20 h-20 md:w-36 md:h-auto shrink-0 overflow-hidden">
+                    <div className="w-20 h-20 md:w-36 md:h-auto shrink-0 overflow-hidden relative">
                       <img
                         src={item.image}
                         alt={item.name}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         loading="lazy"
                       />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-3 py-1.5 bg-gold text-black text-[10px] md:text-xs font-medium rounded-full tracking-wide">
+                          {lang === 'fr' ? 'Ajouter' : lang === 'pt' ? 'Adicionar' : 'Add'}
+                        </span>
+                      </div>
                     </div>
                   )}
                   <div className="flex-1 min-w-0 p-3 md:p-4 pr-4 flex flex-col justify-between">
@@ -114,7 +122,7 @@ export default function MenuPage() {
 
                     <div className="flex items-center justify-between mt-2">
                       <span className="text-gold/50 text-xs md:text-sm">{item.price}</span>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
                       {inCart ? (
                         <div className="flex items-center gap-1.5 bg-white/5 rounded-full border border-white/10">
                           <button
@@ -287,6 +295,18 @@ export default function MenuPage() {
           </>
         )}
       </AnimatePresence>
+
+      {/* Item Detail Modal */}
+      <MenuModal
+        item={selectedItem}
+        onClose={() => setSelectedItem(null)}
+        onAddToCart={(name) => {
+          const cat = activeData?.id || activeCategory;
+          addItem(name, cat);
+        }}
+        cartQuantity={selectedItem ? cartItems.find((i) => i.name === selectedItem.name)?.quantity || 0 : 0}
+        onUpdateQuantity={(name, qty) => updateQuantity(name, qty)}
+      />
     </div>
   );
 }
