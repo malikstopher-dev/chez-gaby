@@ -7,13 +7,14 @@ import type { MenuItem } from '@/lib/menuData';
 interface MenuModalProps {
   item: MenuItem | null;
   onClose: () => void;
-  onAddToCart?: (name: string) => void;
+  onAddToCart?: (name: string, category?: string) => void;
   cartQuantity?: number;
   onUpdateQuantity?: (name: string, qty: number) => void;
+  activeCategory?: string;
 }
 
-export function MenuModal({ item, onClose, onAddToCart, cartQuantity = 0, onUpdateQuantity }: MenuModalProps) {
-  const { lang } = useLanguage();
+export function MenuModal({ item, onClose, onAddToCart, cartQuantity = 0, onUpdateQuantity, activeCategory }: MenuModalProps) {
+  const { t, lang } = useLanguage();
 
   if (!item) return null;
 
@@ -39,6 +40,7 @@ export function MenuModal({ item, onClose, onAddToCart, cartQuantity = 0, onUpda
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             className="relative w-full max-w-lg bg-charcoal border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
@@ -52,7 +54,7 @@ export function MenuModal({ item, onClose, onAddToCart, cartQuantity = 0, onUpda
 
             {/* Image */}
             {item.image && (
-              <div className="w-full h-64 overflow-hidden">
+              <div className="w-full h-64 overflow-hidden relative">
                 <img
                   src={item.image}
                   alt={item.name}
@@ -88,7 +90,7 @@ export function MenuModal({ item, onClose, onAddToCart, cartQuantity = 0, onUpda
               <p className="text-white/50 text-sm leading-relaxed mb-6">{description}</p>
 
               {/* Add to Cart / Quantity */}
-              {onAddToCart && (
+              {onAddToCart ? (
                 <div className="flex items-center justify-between">
                   {cartQuantity > 0 && onUpdateQuantity ? (
                     <div className="flex items-center gap-3">
@@ -111,7 +113,7 @@ export function MenuModal({ item, onClose, onAddToCart, cartQuantity = 0, onUpda
                   )}
                   <button
                     onClick={() => {
-                      onAddToCart(item.name);
+                      onAddToCart(item.name, activeCategory);
                       onClose();
                     }}
                     className="px-8 py-3 bg-gold text-black font-medium rounded-full hover:bg-gold/90 transition-colors text-sm tracking-wide"
@@ -119,10 +121,8 @@ export function MenuModal({ item, onClose, onAddToCart, cartQuantity = 0, onUpda
                     {cartQuantity > 0 ? t.menu.addMore : t.menu.addToCartFull}
                   </button>
                 </div>
-              )}
-
-              {/* View Menu CTA (homepage only) */}
-              {!onAddToCart && (
+              ) : (
+                /* Homepage: Add to cart navigates to /menu */
                 <a
                   href="/menu"
                   className="block w-full py-3 bg-gold text-black font-medium rounded-full hover:bg-gold/90 transition-colors text-sm tracking-wide text-center"
