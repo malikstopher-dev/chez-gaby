@@ -22,7 +22,7 @@ export const fr = {
   chef: {
     title: 'Notre Chef',
     subtitle: 'Gabriel Sousa Rosa',
-    content: 'Une passion pour la gastronomie franco-portugaise, un engagement pour les ingrédients les plus frais, et un dévouement à créer des expériences culinaires inoubliables.',
+    content: 'Né au Brésil et installé à Kinshasa, Gabriel Sousa Rosa marie les saveurs de son héritage brésilien à la finesse de la cuisine française. Un engagement pour les ingrédients les plus frais et un dévouement à créer des expériences culinaires inoubliables.',
     signature: 'Créateur de Saveurs',
   },
   menu: {

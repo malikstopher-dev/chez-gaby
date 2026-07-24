@@ -22,7 +22,7 @@ export const en = {
   chef: {
     title: 'Our Chef',
     subtitle: 'Gabriel Sousa Rosa',
-    content: 'A passion for Franco-Portuguese gastronomy, a commitment to the freshest ingredients, and a dedication to creating unforgettable dining experiences.',
+    content: 'Born in Brazil and based in Kinshasa, Gabriel Sousa Rosa blends the flavors of his Brazilian heritage with the refinement of French cuisine. A commitment to the freshest ingredients and a dedication to creating unforgettable dining experiences.',
     signature: 'Creator of Flavors',
   },
   menu: {

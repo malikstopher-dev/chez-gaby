@@ -4,7 +4,6 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/store/language';
 import { ScrollIndicator } from '@/components/ui/ScrollIndicator';
-import { LuxuryScene } from '@/components/threed/LuxuryScene';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 const SLIDESHOW_IMAGES = [
@@ -33,10 +32,11 @@ export function Hero() {
     <section
       ref={containerRef}
       id="hero"
-      className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden walnut-bg"
+      className="relative h-screen min-h-[700px] overflow-hidden walnut-bg"
       role="banner"
       aria-label="Chez Gaby hero section"
     >
+      {/* Background Slideshow */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
         <AnimatePresence mode="wait">
           <motion.img
@@ -51,13 +51,63 @@ export function Hero() {
         </AnimatePresence>
       </div>
 
+      {/* Overlays */}
       <div className="absolute inset-0 bg-black/20 z-[1]" aria-hidden="true" />
       <div className="absolute inset-0 candlelight z-[1]" aria-hidden="true" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 z-[1]" aria-hidden="true" />
 
-      <LuxuryScene />
+      {/* Mobile Layout: Logo top, title center */}
+      <div className="relative z-10 h-full flex flex-col sm:hidden">
+        {/* Logo + Subtitle at top */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="pt-20 pb-4 text-center px-6"
+        >
+          <img
+            src="/images/logo.jpg"
+            alt="Chez Gaby"
+            className="h-20 mx-auto object-contain mb-4"
+            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+          />
+          <span className="text-[10px] tracking-[0.35em] uppercase text-gold/60 font-sans">
+            {t.hero.subtitle}
+          </span>
+        </motion.div>
 
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto w-full">
+        {/* Title centered */}
+        <div className="flex-1 flex flex-col items-center justify-center px-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="text-5xl font-serif text-white mb-6 tracking-[0.03em] leading-[1.1] text-shadow-gold"
+          >
+            {t.hero.title}
+          </motion.h1>
+
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 1.5, delay: 1.4, ease: 'easeInOut' }}
+            className="w-16 h-[1.5px] mx-auto mb-8"
+            style={{ background: 'linear-gradient(90deg, transparent, #C9A84C, transparent)' }}
+          />
+
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.8 }}
+            className="text-sm text-white/45 max-w-lg mx-auto leading-relaxed font-light tracking-wide"
+          >
+            {t.hero.description}
+          </motion.p>
+        </div>
+      </div>
+
+      {/* Desktop Layout: Everything centered */}
+      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto w-full hidden sm:flex sm:flex-col sm:items-center sm:justify-center sm:h-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -67,7 +117,7 @@ export function Hero() {
           <img
             src="/images/logo.jpg"
             alt="Chez Gaby"
-            className="h-16 md:h-20 mx-auto object-contain"
+            className="h-20 mx-auto object-contain"
             onError={(e) => { e.currentTarget.style.display = 'none'; }}
           />
         </motion.div>
@@ -76,7 +126,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9 }}
-          className="text-xs md:text-sm tracking-[0.35em] uppercase text-gold/60 block mb-8 font-sans"
+          className="text-sm tracking-[0.35em] uppercase text-gold/60 block mb-8 font-sans"
         >
           {t.hero.subtitle}
         </motion.span>
@@ -85,7 +135,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.1 }}
-          className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-6 tracking-[0.03em] leading-[1.1] text-shadow-gold"
+          className="text-8xl lg:text-9xl font-serif text-white mb-6 tracking-[0.03em] leading-[1.1] text-shadow-gold"
         >
           {t.hero.title}
         </motion.h1>
@@ -102,7 +152,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.2 }}
-          className="text-sm md:text-base lg:text-lg text-white/45 max-w-2xl mx-auto mb-12 leading-relaxed font-light tracking-wide"
+          className="text-base lg:text-lg text-white/45 max-w-2xl mx-auto mb-12 leading-relaxed font-light tracking-wide"
         >
           {t.hero.description}
         </motion.p>
@@ -111,7 +161,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.6 }}
-          className="hidden sm:flex flex-row items-center justify-center gap-4"
+          className="flex flex-row items-center justify-center gap-4"
         >
           <motion.a
             href="#reservations"
@@ -149,7 +199,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 3.2, duration: 0.8 }}
-          className="hidden sm:flex mt-16 items-center justify-center gap-8 text-[10px] tracking-[0.2em] uppercase text-white/20"
+          className="flex mt-16 items-center justify-center gap-8 text-[10px] tracking-[0.2em] uppercase text-white/20"
         >
           <span className="flex items-center gap-2">
             <span className="w-1 h-1 rounded-full bg-gold/40" />
