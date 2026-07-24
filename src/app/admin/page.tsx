@@ -1,42 +1,67 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { getSupabase } from '@/lib/supabase';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import Toast from '@/components/admin/Toast';
 
-const CARDS = [
-  { href: '/admin/settings', title: 'Paramètres', desc: 'Horaires, adresse, téléphone, réseaux sociaux', icon: '⚙', color: 'border-gold/30' },
-  { href: '/admin/menu', title: 'Menu', desc: 'Gérer les catégories et les plats', icon: '☰', color: 'border-blue-400/30' },
+const sections = [
+  { href: '/admin/settings', label: 'Paramètres', desc: 'Horaires, adresse, téléphone, réseaux sociaux', icon: '⚙' },
+  { href: '/admin/menu', label: 'Menu', desc: 'Gérer les catégories et les plats', icon: '☰' },
+  { href: '/admin/gallery', label: 'Galerie Photos', desc: 'Ajouter et organiser les photos', icon: '🖼' },
 ];
 
 export default function AdminDashboard() {
-  const [userEmail, setUserEmail] = useState('');
-  const [stats, setStats] = useState({ menuItems: 0, categories: 0 });
+  const [stats, setStats] = useState({ menuItems: 0, categories: 0, gallery: 0 });
+  const [seeding, setSeeding] = useState(false);
+  const [seeded, setSeeded] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
   useEffect(() => {
-    const supabase = getSupabase();
-    supabase.auth.getUser().then(({ data }) => {
-      if (data.user) setUserEmail(data.user.email || '');
-    });
-    Promise.all([
-      supabase.from('menu_items').select('*', { count: 'exact', head: true }),
-      supabase.from('menu_categories').select('*', { count: 'exact', head: true }),
-    ]).then(([items, cats]) => {
-      setStats({
-        menuItems: items.count || 0,
-        categories: cats.count || 0,
-      });
-    });
+    fetch('/api/admin/menu')
+      .then(r => r.json())
+      .then(d => setStats(prev => ({ ...prev, menuItems: d.items?.length || 0, categories: d.categories?.length || 0 })))
+      .catch(() => {});
+    fetch('/api/admin/gallery')
+      .then(r => r.json())
+      .then(d => setStats(prev => ({ ...prev, gallery: d.data?.length || 0 })))
+      .catch(() => {});
   }, []);
+
+  const handleSeed = async () => {
+    setSeeding(true);
+    try {
+      const res = await fetch('/api/admin/seed', { method: 'POST' });
+      const data = await res.json();
+      if (res.ok) {
+        setSeeded(true);
+        setToast({ message: data.message || 'Données importées !', type: 'success' });
+        // Refresh stats
+        const menuRes = await fetch('/api/admin/menu');
+        const menuData = await menuRes.json();
+        setStats(prev => ({
+          ...prev,
+          menuItems: menuData.items?.length || 0,
+          categories: menuData.categories?.length || 0,
+        }));
+      } else {
+        setToast({ message: data.error || 'Erreur lors de l\'import', type: 'error' });
+      }
+    } catch {
+      setToast({ message: 'Erreur réseau', type: 'error' });
+    }
+    setSeeding(false);
+  };
 
   return (
     <div>
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+
       <div className="mb-10">
-        <h1 className="text-3xl font-serif text-white mb-2">Bon retour 👋</h1>
-        <p className="text-white/40 text-sm">{userEmail}</p>
+        <h1 className="text-3xl font-serif text-white mb-2">Tableau de bord</h1>
+        <p className="text-white/40 text-sm">Gérez le contenu du site Chez Gaby</p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-4 mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         <div className="glass rounded-2xl p-6 text-center">
           <p className="text-3xl font-serif text-gold mb-1">{stats.menuItems}</p>
           <p className="text-white/40 text-xs uppercase tracking-wider">Plats</p>
@@ -46,26 +71,35 @@ export default function AdminDashboard() {
           <p className="text-white/40 text-xs uppercase tracking-wider">Catégories</p>
         </div>
         <div className="glass rounded-2xl p-6 text-center">
-          <p className="text-3xl font-serif text-gold mb-1">3</p>
-          <p className="text-white/40 text-xs uppercase tracking-wider">Langues</p>
+          <p className="text-3xl font-serif text-gold mb-1">{stats.gallery}</p>
+          <p className="text-white/40 text-xs uppercase tracking-wider">Photos</p>
         </div>
       </div>
 
-      <h2 className="text-lg font-serif text-white mb-4">Gestion</h2>
-      <div className="grid md:grid-cols-2 gap-4">
-        {CARDS.map((card) => (
-          <Link
-            key={card.href}
-            href={card.href}
-            className={`glass rounded-2xl p-6 hover:border-gold/30 transition-all duration-300 group border ${card.color}`}
+      {stats.menuItems === 0 && !seeded && (
+        <div className="glass rounded-2xl p-6 border border-gold/30 mb-8">
+          <p className="text-white text-sm mb-3">Aucune donnée trouvée. Importez le menu du restaurant dans la base de données ?</p>
+          <button
+            onClick={handleSeed}
+            disabled={seeding}
+            className="bg-gold text-black px-6 py-2 text-xs uppercase tracking-[0.15em] font-medium rounded-full hover:bg-gold/90 transition-colors disabled:opacity-50"
           >
-            <div className="flex items-start gap-4">
-              <span className="text-3xl">{card.icon}</span>
-              <div>
-                <h3 className="text-white font-serif text-lg group-hover:text-gold transition-colors mb-1">{card.title}</h3>
-                <p className="text-white/40 text-sm">{card.desc}</p>
-              </div>
-            </div>
+            {seeding ? 'Importation...' : 'Importer le menu'}
+          </button>
+        </div>
+      )}
+
+      <h2 className="text-white text-sm uppercase tracking-[0.15em] mb-4">Gestion du site</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {sections.map((s) => (
+          <Link
+            key={s.href}
+            href={s.href}
+            className="glass rounded-2xl p-6 hover:border-gold/30 transition-all duration-300 group border border-white/5"
+          >
+            <span className="text-3xl mb-3 block">{s.icon}</span>
+            <h3 className="text-white font-serif text-lg group-hover:text-gold transition-colors">{s.label}</h3>
+            <p className="text-white/40 text-sm mt-1">{s.desc}</p>
           </Link>
         ))}
       </div>

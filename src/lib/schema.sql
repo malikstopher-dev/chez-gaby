@@ -87,9 +87,4 @@ CREATE POLICY "Public read access" ON menu_items FOR SELECT USING (true);
 CREATE POLICY "Public read access" ON hero_images FOR SELECT USING (true);
 CREATE POLICY "Public read access" ON gallery_images FOR SELECT USING (true);
 
--- Admin write access (authenticated users)
-CREATE POLICY "Admin write access" ON restaurant_settings FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin write access" ON menu_categories FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin write access" ON menu_items FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin write access" ON hero_images FOR ALL USING (auth.role() = 'authenticated');
-CREATE POLICY "Admin write access" ON gallery_images FOR ALL USING (auth.role() = 'authenticated');
+-- Admin write access (service role bypasses RLS, so no additional policy needed)
