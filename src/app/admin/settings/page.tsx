@@ -37,7 +37,7 @@ export default function SettingsPage() {
     const supabase = getSupabase();
     const { data, error } = await supabase.from('restaurant_settings').select('*').limit(1).single();
     if (data) {
-      setSettings({ ...DEFAULT_SETTINGS, ...data });
+      setSettings({ ...DEFAULT_SETTINGS, ...data as typeof DEFAULT_SETTINGS });
       setTableExists(true);
     } else if (error?.code === 'PGRST116') {
       setTableExists(true);
