@@ -4,7 +4,13 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/store/language';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
-const STEAKS = ['Wagyu A5', 'Tomahawk', 'T-Bone', "Côte à l'Os", "Entrecôte de Belgique"];
+const STEAKS = [
+  { name: 'Wagyu A5', image: '/images/wagyu-a5.jpg' },
+  { name: 'Tomahawk', image: '/images/tomahawk.jpg' },
+  { name: 'T-Bone', image: '/images/t-bone.jpg' },
+  { name: "Côte à l'Os", image: '/images/cote-a-los.jpg' },
+  { name: 'Entrecôte de Belgique', image: '/images/entrecote-de-belgique.jpg' },
+];
 
 export function Steak() {
   const { t, lang } = useLanguage();
@@ -20,17 +26,24 @@ export function Steak() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
           {STEAKS.map((steak, i) => (
             <motion.div
-              key={steak}
+              key={steak.name}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="glass rounded-2xl p-6 text-center luxury-shadow hover:border-gold/30 hover:bg-glass-hover transition-all duration-500 group"
+              className="glass rounded-2xl overflow-hidden luxury-shadow hover:border-gold/30 transition-all duration-500 group"
             >
-              <div className="w-12 h-12 mx-auto mb-4 rounded-full gold-gradient-solid/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                <span className="text-xl">🥩</span>
+              <div className="aspect-square overflow-hidden">
+                <img
+                  src={steak.image}
+                  alt={steak.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
               </div>
-              <h3 className="text-white font-serif text-sm md:text-base group-hover:text-gold transition-colors">{steak}</h3>
+              <div className="p-4 text-center">
+                <h3 className="text-white font-serif text-sm md:text-base group-hover:text-gold transition-colors">{steak.name}</h3>
+              </div>
             </motion.div>
           ))}
         </div>

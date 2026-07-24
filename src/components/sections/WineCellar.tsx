@@ -5,9 +5,9 @@ import { useLanguage } from '@/store/language';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 
 const WINE_REGIONS = [
-  { name: 'Bordeaux', emoji: '🍷', descFr: "Une sélection des meilleurs crus de Bordeaux", descEn: "A selection of the finest Bordeaux vintages" },
-  { name: 'Bourgogne', emoji: '🍷', descFr: "Les grands vins de Bourgogne soigneusement sélectionnés", descEn: "Great Burgundy wines carefully selected" },
-  { name: 'Portugal', emoji: '🍷', descFr: "Les meilleurs crus portugais de notre carte", descEn: "The finest Portuguese vintages on our list" },
+  { name: 'Bordeaux', descFr: "Une sélection des meilleurs crus de Bordeaux", descEn: "A selection of the finest Bordeaux vintages", image: '/images/bordeaux.jpg' },
+  { name: 'Bourgogne', descFr: "Les grands vins de Bourgogne soigneusement sélectionnés", descEn: "Great Burgundy wines carefully selected", image: '/images/bourgogne.jpg' },
+  { name: 'Portugal', descFr: "Les meilleurs crus portugais de notre carte", descEn: "The finest Portuguese vintages on our list", image: '/images/portugal.jpg' },
 ];
 
 export function WineCellar() {
@@ -38,15 +38,22 @@ export function WineCellar() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="glass rounded-2xl p-8 text-center luxury-shadow hover:border-gold/20 transition-all duration-500 group"
+              className="glass rounded-2xl overflow-hidden luxury-shadow hover:border-gold/20 transition-all duration-500 group"
             >
-              <div className="w-16 h-16 mx-auto mb-6 rounded-full gold-gradient-solid/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                <span className="text-2xl">{region.emoji}</span>
+              <div className="aspect-[16/10] overflow-hidden">
+                <img
+                  src={region.image}
+                  alt={region.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
               </div>
-              <h3 className="text-white font-serif text-xl mb-3">{region.name}</h3>
-              <p className="text-white/40 text-sm leading-relaxed">
-                {lang === 'fr' ? region.descFr : region.descEn}
-              </p>
+              <div className="p-6 text-center">
+                <h3 className="text-white font-serif text-xl mb-3">{region.name}</h3>
+                <p className="text-white/40 text-sm leading-relaxed">
+                  {lang === 'fr' ? region.descFr : region.descEn}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
