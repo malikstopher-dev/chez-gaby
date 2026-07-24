@@ -51,18 +51,11 @@ export function Hero() {
         </AnimatePresence>
       </div>
 
-      <div className="absolute inset-0 bg-black/50 z-[1]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-black/20 z-[1]" aria-hidden="true" />
       <div className="absolute inset-0 candlelight z-[1]" aria-hidden="true" />
-      <div className="absolute inset-0 vignette z-[1]" aria-hidden="true" />
-      <div className="absolute inset-0 hero-glow z-[1]" aria-hidden="true" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 z-[1]" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 z-[1]" aria-hidden="true" />
 
       <LuxuryScene />
-
-      <div className="absolute inset-0 overflow-hidden z-[1]" aria-hidden="true">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(255,165,0,0.04) 0%, transparent 70%)' }} />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.03) 0%, transparent 70%)' }} />
-      </div>
 
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto w-full">
         <motion.div
@@ -118,7 +111,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 2.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="hidden sm:flex flex-row items-center justify-center gap-4"
         >
           <motion.a
             href="#reservations"
@@ -156,7 +149,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 3.2, duration: 0.8 }}
-          className="mt-16 flex items-center justify-center gap-8 text-[10px] tracking-[0.2em] uppercase text-white/20"
+          className="hidden sm:flex mt-16 items-center justify-center gap-8 text-[10px] tracking-[0.2em] uppercase text-white/20"
         >
           <span className="flex items-center gap-2">
             <span className="w-1 h-1 rounded-full bg-gold/40" />
@@ -174,6 +167,28 @@ export function Hero() {
       </div>
 
       <ScrollIndicator />
+
+      {/* Mobile Sticky Bottom Nav */}
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-xl border-t border-white/10">
+        <div className="flex items-center justify-around py-2 px-2">
+          <a href="#reservations" className="flex flex-col items-center gap-0.5 text-white/60 hover:text-gold transition-colors">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>
+            <span className="text-[9px] tracking-wider uppercase">{t.hero.booking.split(' ').slice(-1)}</span>
+          </a>
+          <a href="/menu" className="flex flex-col items-center gap-0.5 text-gold">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+            <span className="text-[9px] tracking-wider uppercase font-medium">Menu</span>
+          </a>
+          <a href="#story" className="flex flex-col items-center gap-0.5 text-white/60 hover:text-gold transition-colors">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+            <span className="text-[9px] tracking-wider uppercase">{t.nav.story.split(' ').slice(-1)}</span>
+          </a>
+          <a href="tel:+243819976959" className="flex flex-col items-center gap-0.5 text-white/60 hover:text-gold transition-colors">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+            <span className="text-[9px] tracking-wider uppercase">Appeler</span>
+          </a>
+        </div>
+      </div>
     </section>
   );
 }

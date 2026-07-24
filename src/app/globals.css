@@ -199,3 +199,21 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 52px;
+  }
+  section {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  section#hero {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: 100svh;
+  }
+  section#hero .relative.z-10 {
+    padding-bottom: 4rem;
+  }
+}
